@@ -21,8 +21,8 @@
           <task />
         </div>
       </div>
-      <button class='ui button b1'>
-        <i class='ui plus icon i1' />
+      <button class='ui button buttonType1'>
+        <i class='ui plus icon iconType1' />
         Add TODO List
       </button>
     </div>
@@ -42,11 +42,10 @@ export default {
 .project-header {
   font-size: 18px;
 }
-.ui.button.b1 {
-
+.ui.button.buttonType1 {
   margin-left: 40%;
 }
-.ui.plus.icon.i1 {
+.ui.plus.icon.iconType1 {
   padding-right: 3px;
 }
 .ui.centered.two.column.grid {
