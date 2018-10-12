@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from '../App.vue'
 import 'semantic-ui-css/semantic.css'
+import axios from 'axios'
 
 document.addEventListener('DOMContentLoaded', () => {
   document.body.appendChild(document.createElement('app'))
