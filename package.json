@@ -13,5 +13,10 @@
   },
   "devDependencies": {
     "webpack-dev-server": "^2.11.0"
-  }
+  },
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/SuperUser322/todolist.git",
+  "author": "Alex <borntorunthecopsdonotcatch@gmail.com>",
+  "license": "MIT"
 }

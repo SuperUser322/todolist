@@ -4,7 +4,7 @@
       <div class='ui fluid card'>
         <div class='ui segment'>
           <i class='ui big calendar icon' />
-          <span class='project-header'>Complete the test task for Ruby Garage</span>
+          <span class='project-header'>{{title}}</span>
           <span class='right floated'>
             <i class='ui pencil right icon' />
             <i class='ui trash right icon' />
@@ -32,9 +32,10 @@
 <script>
 import task from 'components/Task'
 export default {
-  components : {
+  components: {
     task
-  }
+  },
+  props: ['title'],
 }
 
 //p1.then

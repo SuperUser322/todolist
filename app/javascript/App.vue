@@ -1,6 +1,6 @@
 <template>
   <div>
-    <project v-for = "project in projects" />
+    <project v-for = "project in projects" :key="project.id" :title = "project" />
   </div>
 </template>
 
@@ -10,16 +10,16 @@ import {getProjectsList} from 'api.js'
 import normalize from 'json-api-normalize'
 export default {
   components: {
-    project
+    project,
   },
-  data: function() {
-      return {projects: []
-      }
+  data () {
+      return {projects: []}
   },
-  created: function() {
+  created () {
     getProjectsList()
-    .then(function (response) {
-      this.projects = normalize(response).get([ 'id', 'title']);
+    .then((response) => {
+      console.log(response);
+      this.projects = normalize(response.data).get('title');
     })
   }
 }
