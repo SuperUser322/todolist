@@ -1,6 +1,10 @@
 <template>
   <div>
     <project v-for = "project in projects" :key="project.id" :title = "project" />
+    <button class='ui button buttonType1'>
+      <i class='ui plus icon iconType1' />
+      Add TODO List
+    </button>
   </div>
 </template>
 
@@ -24,3 +28,13 @@ export default {
   }
 }
 </script>
+
+<style>
+.ui.button.buttonType1 {
+  margin-left: 44%;
+  margin-top: 2%;
+}
+.ui.plus.icon.iconType1 {
+  padding-right: 3px;
+}
+</style>
