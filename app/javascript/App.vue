@@ -1,6 +1,6 @@
 <template>
   <div>
-    <project v-for = "project in projects" :key="project.id" :title = "project" />
+    <project v-for="project in projects" :key="project.id" :project="project" />
     <button class='ui button buttonType1'>
       <i class='ui plus icon iconType1' />
       Add TODO List
@@ -23,7 +23,7 @@ export default {
     getProjectsList()
     .then((response) => {
       console.log(response);
-      this.projects = normalize(response.data).get('title');
+      this.projects = normalize(response.data).get('title', 'tasks.text');
     })
   }
 }

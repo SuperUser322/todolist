@@ -4,7 +4,7 @@
       <div class='ui fluid card'>
         <div class='ui segment'>
           <i class='ui big calendar icon' />
-          <span class='project-header'>{{title}}</span>
+          <span class='project-header'>{{project}}</span>
           <span class='right floated'>
             <i class='ui pencil right icon' />
             <i class='ui trash right icon' />
@@ -16,9 +16,7 @@
           <button class='ui teal button'>Add Task</button>
         </div>
         <div class='ui divided items'>
-          <task />
-          <task />
-          <task />
+          <task v-for="task in project.tasks" :key="task.id" :task="task" />
         </div>
       </div>
     </div>
@@ -31,7 +29,7 @@ export default {
   components: {
     task
   },
-  props: ['title'],
+  props: ['project'],
 }
 
 //p1.then
