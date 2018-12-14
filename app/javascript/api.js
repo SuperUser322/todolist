@@ -4,3 +4,6 @@ const httpClient = axios.create({
 });
 export const getProjectsList = () =>
 httpClient.get('/projects')
+
+export const createNewProject = () =>
+httpClient.post('/projects')

@@ -1,7 +1,7 @@
 <template>
   <div>
     <project v-for="project in projects" :key="project.id" :project="project" />
-    <button class='ui button buttonType1'>
+    <button class='ui button buttonType1' @click="createNewProject">
       <i class='ui plus icon iconType1' />
       Add TODO List
     </button>
@@ -10,20 +10,26 @@
 
 <script>
 import project from 'components/Project'
-import {getProjectsList} from 'api.js'
+import {getProjectsList, createNewProject} from 'api.js'
 import normalize from 'json-api-normalize'
 export default {
   components: {
     project,
   },
+
   data () {
       return {projects: []}
+  },
+  methods: {
+    createNewProject () {
+      createNewProject()
+    }
   },
   created () {
     getProjectsList()
     .then((response) => {
       console.log(response);
-      this.projects = normalize(response.data).get('title', 'tasks.text');
+      this.projects = normalize(response.data).get(['title', 'tasks.text']);
     })
   }
 }

@@ -4,7 +4,7 @@
       <div class='ui fluid card'>
         <div class='ui segment'>
           <i class='ui big calendar icon' />
-          <span class='project-header'>{{project}}</span>
+          <span class='project-header'>{{project.title}}</span>
           <span class='right floated'>
             <i class='ui pencil right icon' />
             <i class='ui trash right icon' />

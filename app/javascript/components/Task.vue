@@ -5,7 +5,7 @@
         <input type='checkbox'>
         <label></label>
       </div>
-      {{task}}
+      {{task.text}}
       <div class='right floated content'>
         <i class='ui right sort icon iconType2' />
         <i class='ui right pencil icon iconType2' />
