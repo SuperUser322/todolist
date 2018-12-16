@@ -23,6 +23,10 @@ export default {
   methods: {
     createNewProject () {
       createNewProject()
+      .then((response) => {
+        const project = normalize(response.data).get(['title']);
+        this.projects.push(project);
+      })
     }
   },
   created () {
