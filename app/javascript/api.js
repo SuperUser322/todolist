@@ -7,3 +7,6 @@ httpClient.get('/projects')
 
 export const createNewProject = () =>
 httpClient.post('/projects')
+
+export const handleDestroyProject = (id) =>
+httpClient.delete(`/projects/${id}`)

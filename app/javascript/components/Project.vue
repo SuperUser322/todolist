@@ -7,7 +7,7 @@
           <span class='project-header'>{{project.title}}</span>
           <span class='right floated'>
             <i class='ui pencil right icon' />
-            <i class='ui trash right icon' />
+            <i class='ui link trash right icon' @click = "destroyProject(project.id)" />
           </span>
         </div>
         <div class='ui action input'>
@@ -29,7 +29,7 @@ export default {
   components: {
     task
   },
-  props: ['project'],
+  props: ['project','destroyProject'],
 }
 
 //p1.then
