@@ -1,4 +1,4 @@
 class Task < ApplicationRecord
-  belong_to :project
-  validates :text, :project, precence: true
+  belongs_to :project
+  validates :text, :project, presence: true
 end

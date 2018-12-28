@@ -15,6 +15,8 @@ gem 'jbuilder', '~> 2.5'
 gem 'webpacker'
 gem 'foreman'
 
+gem 'fast_jsonapi'
+
 group :development, :test do
   gem 'pry'
 end

@@ -4,10 +4,10 @@
       <div class='ui fluid card'>
         <div class='ui segment'>
           <i class='ui big calendar icon' />
-          <span class='project-header'>Complete the test task for Ruby Garage</span>
+          <span class='project-header'>{{project.title}}</span>
           <span class='right floated'>
             <i class='ui pencil right icon' />
-            <i class='ui trash right icon' />
+            <i class='ui link trash right icon' @click = "destroyProject(project.id)" />
           </span>
         </div>
         <div class='ui action input'>
@@ -16,15 +16,9 @@
           <button class='ui teal button'>Add Task</button>
         </div>
         <div class='ui divided items'>
-          <task />
-          <task />
-          <task />
+          <task v-for="task in project.tasks" :key="task.id" :task="task" />
         </div>
       </div>
-      <button class='ui button buttonType1'>
-        <i class='ui plus icon iconType1' />
-        Add TODO List
-      </button>
     </div>
   </div>
 </template>
@@ -32,21 +26,18 @@
 <script>
 import task from 'components/Task'
 export default {
-  components : {
+  components: {
     task
-  }
+  },
+  props: ['project','destroyProject'],
 }
+
+//p1.then
 </script>
 
 <style>
 .project-header {
   font-size: 18px;
-}
-.ui.button.buttonType1 {
-  margin-left: 40%;
-}
-.ui.plus.icon.iconType1 {
-  padding-right: 3px;
 }
 .ui.centered.two.column.grid {
   padding-top: 20px;

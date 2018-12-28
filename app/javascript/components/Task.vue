@@ -5,7 +5,7 @@
         <input type='checkbox'>
         <label></label>
       </div>
-      Open this mock-up in Adobe Fireworks
+      {{task.text}}
       <div class='right floated content'>
         <i class='ui right sort icon iconType2' />
         <i class='ui right pencil icon iconType2' />
@@ -14,6 +14,12 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  props: ['task'],
+}
+</script>
 
 <style>
 .ui.right.trash.icon.iconType2 {
