@@ -7,9 +7,9 @@
       </div>
       {{task.text}}
       <div class='right floated content'>
-        <i class='ui right sort icon iconType2' />
-        <i class='ui right pencil icon iconType2' />
-        <i class='ui right trash icon iconType2' />
+        <i class='ui right sort icon icon-type2' />
+        <i class='ui right pencil icon icon-type2' />
+        <i class='ui right trash icon icon-type2' />
       </div>
     </div>
   </div>
@@ -22,7 +22,7 @@ export default {
 </script>
 
 <style>
-.ui.right.trash.icon.iconType2 {
+.ui.right.trash.icon.icon-type2 {
   padding-right: 30px;
 }
 </style>
