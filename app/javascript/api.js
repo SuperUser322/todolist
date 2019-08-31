@@ -6,11 +6,17 @@ const httpClient = axios.create({
 export const getProjectsList = () =>
 httpClient.get('/projects')
 
-export const handleCreateNewProject = () =>
+export const createNewProject = () =>
 httpClient.post('/projects')
 
-export const handleDestroyProject = (id) =>
+export const destroyProject = (id) =>
 httpClient.delete(`/projects/${id}`)
 
 export const updateProject = (id, title) =>
 httpClient.patch(`/projects/${id}`, {title})
+
+export const createNewTask = (projectId, text) =>
+httpClient.post(`/projects/${projectId}/tasks`, {text})
+
+export const destroyTask = (taskId) =>
+httpClient.delete(`/tasks/${taskId}`)

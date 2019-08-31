@@ -9,7 +9,7 @@
       <div class='right floated content'>
         <i class='ui right sort icon icon-type2' />
         <i class='ui right pencil icon icon-type2' />
-        <i class='ui right trash icon icon-type2' />
+        <i class='ui right trash icon icon-type2' @click="handleDestroyTask(task.id)" />
       </div>
     </div>
   </div>
@@ -17,7 +17,7 @@
 
 <script>
 export default {
-  props: ['task'],
+  props: ['task', 'handleDestroyTask'],
 }
 </script>
 
