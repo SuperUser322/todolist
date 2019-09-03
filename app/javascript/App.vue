@@ -2,7 +2,7 @@
   <div>
     <project v-for="project in projects" :key="project.id" :project="project" :handleDestroyProject="handleDestroyProject"/>
     <button class='ui button button-type1' @click="handleCreateNewProject">
-      <i class='ui plus icon icon-type1' />
+      <i class='ui plus icon icon-type1'/>
       Add TODO List
     </button>
   </div>
@@ -38,7 +38,7 @@ export default {
   created () {
     getProjectsList()
     .then((response) => {
-      this.projects = normalize(response.data).get(['title', 'tasks.text', 'id', 'tasks.id']);
+      this.projects = normalize(response.data).get(['title', 'tasks.text', 'id', 'tasks.id', 'task.done']);
     })
   },
 }

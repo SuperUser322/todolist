@@ -20,3 +20,6 @@ httpClient.post(`/projects/${projectId}/tasks`, {text})
 
 export const destroyTask = (taskId) =>
 httpClient.delete(`/tasks/${taskId}`)
+
+export const updateTask = (taskId, params) =>
+httpClient.patch(`/tasks/${taskId}`, params)

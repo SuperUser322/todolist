@@ -3,25 +3,25 @@
     <div class='column'>
       <div class='ui fluid card'>
         <div class='ui segment'>
-          <i class='ui big calendar icon' />
-            <template v-if="editMode">
-              <input v-model="newProjectTitle" :key="project.id">
-              <span class='right floated'>
-                <i class='ui link teal check right icon' @click="handleUpdateProject(); toggleEditMode()"/>
-                <i class='ui link red plus right icon' @click="toggleEditMode"/>
-              </span>
-              <p>{{project.title}}</p>
-            </template>
-            <template v-else>
-              <span class='project-header'>{{project.title}}</span>
-              <span class='right floated'>
-                <i class='ui link pencil right icon' @click="toggleEditMode"/>
-                <i class='ui link trash right icon' @click = "handleDestroyProject(project.id)" />
-              </span>
-            </template>
+          <i class='ui big calendar icon'/>
+          <template v-if="editMode">
+            <input v-model="newProjectTitle" :key="project.id">
+            <span class='right floated'>
+              <i class='ui link teal check right icon' @click="handleUpdateProject(); toggleEditMode()"/>
+              <i class='ui link red plus right icon' @click="toggleEditMode"/>
+            </span>
+            <p>{{project.title}}</p>
+          </template>
+          <template v-else>
+            <span class='project-header'>{{project.title}}</span>
+            <span class='right floated'>
+              <i class='ui link pencil right icon' @click="toggleEditMode"/>
+              <i class='ui link trash right icon' @click="handleDestroyProject(project.id)"/>
+            </span>
+          </template>
         </div>
         <div class='ui action input'>
-          <i class='ui big plus icon teal' />
+          <i class='ui big plus icon teal'/>
           <input v-model="newTaskText" :key="project.id" type='text' placeholder='Start typing here to create a task...'>
           <button class='ui teal button' @click="handleCreateNewTask(project.id)">Add Task</button>
         </div>
@@ -60,7 +60,7 @@ export default {
     handleCreateNewTask () {
       createNewTask(this.project.id, this.newTaskText)
       .then((response) => {
-        const task = normalize(response.data).get(['id', 'text']);
+        const task = normalize(response.data).get(['id', 'text', 'done']);
         this.project.tasks.push(task);
       })
     },
