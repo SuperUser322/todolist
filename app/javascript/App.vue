@@ -38,7 +38,7 @@ export default {
   created () {
     getProjectsList()
     .then((response) => {
-      this.projects = normalize(response.data).get(['title', 'tasks.text', 'id', 'tasks.id', 'task.done']);
+      this.projects = normalize(response.data).get(['title', 'tasks.text', 'id', 'tasks.id', 'tasks.done']);
     })
   },
 }

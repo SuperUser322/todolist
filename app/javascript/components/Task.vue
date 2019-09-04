@@ -2,8 +2,8 @@
   <div class='item'>
     <div class='middle aligned content'>
       <div class='ui checkbox'>
-        <input type='checkbox' checked='this.task.done' @click="handleMarkAsDone">
-        <label></label>
+        <input type='checkbox' :checked='this.task.done' @click="handleMarkAsDone">
+        <label>{{ task.done }}</label>
       </div>
       <template v-if="editMode">
         <input v-model="newTaskText" :key="task.id">
@@ -39,11 +39,11 @@ export default {
       this.editMode = !this.editMode
     },
     handleUpdateTask () {
-      updateTask(this.task.id, {text: this.newTaskText});
+      updateTask(this.task.id, {text: this.newTaskText, done:false});
       this.task.text = this.newTaskText
     },
     handleMarkAsDone () {
-      updateTask(this.task.id, {done: !this.task.done})
+      updateTask(this.task.id, {done: !this.task.done});
       this.task.done = !this.task.done
     }
   },
