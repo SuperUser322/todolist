@@ -5,28 +5,44 @@
         <div class='ui segment'>
           <i class='ui big calendar icon'/>
           <template v-if="editMode">
-            <input v-model="newProjectTitle" :key="project.id">
+            <div class='ui mini input'>
+              <input v-model="newProjectTitle" :key="project.id">
+            </div>
             <span class='right floated'>
-              <i class='ui link teal check right icon' @click="handleUpdateProject(); toggleEditMode()"/>
-              <i class='ui link red plus right icon' @click="toggleEditMode"/>
+              <i
+                class='ui link teal check right icon'
+                @click="handleUpdateProject(); toggleEditMode()"
+              />
+              <i class='ui link red plus right icon' @click="toggleEditMode" />
             </span>
-            <p>{{project.title}}</p>
           </template>
           <template v-else>
             <span class='project-header'>{{project.title}}</span>
             <span class='right floated'>
-              <i class='ui link pencil right icon' @click="toggleEditMode"/>
-              <i class='ui link trash right icon' @click="handleDestroyProject(project.id)"/>
+              <i class='ui link pencil right icon' @click="toggleEditMode" />
+              <i class='ui link trash right icon' @click="handleDestroyProject(project.id)" />
             </span>
           </template>
         </div>
         <div class='ui action input'>
-          <i class='ui big plus icon teal'/>
-          <input v-model="newTaskText" :key="project.id" type='text' placeholder='Start typing here to create a task...'>
-          <button class='ui teal button' @click="handleCreateNewTask(project.id)">Add Task</button>
+          <i class='ui big plus icon teal' />
+          <input
+            v-model="newTaskText"
+            :key="project.id"
+            type='text'
+            placeholder='Start typing here to create a task...'
+          />
+          <button class='ui teal button' @click="handleCreateNewTask(project.id)">
+            Add Task
+          </button>
         </div>
         <div class='ui divided items'>
-          <task v-for="task in project.tasks" :key="task.id" :task="task" :handleDestroyTask="handleDestroyTask"/>
+          <task
+            v-for="task in project.tasks"
+            :key="task.id"
+            :task="task"
+            :handleDestroyTask="handleDestroyTask"
+          />
         </div>
       </div>
     </div>
@@ -35,13 +51,17 @@
 
 <script>
 import task from 'components/Task'
-import {updateProject, createNewTask, destroyTask} from 'api.js'
+import { updateProject, createNewTask, destroyTask } from 'api'
 import normalize from 'json-api-normalize'
+
 export default {
+  created() {
+    this.newProjectTitle = this.project.title
+  },
   components: {
     task
   },
-  data () {
+  data() {
     return {
       editMode: false,
       newProjectTitle:'',
@@ -50,23 +70,21 @@ export default {
     }
   },
   methods: {
-    toggleEditMode () {
+    toggleEditMode() {
       this.editMode = !this.editMode
     },
-    handleUpdateProject () {
+    handleUpdateProject() {
       updateProject(this.project.id, this.newProjectTitle);
       this.project.title = this.newProjectTitle
     },
-    handleCreateNewTask () {
-      createNewTask(this.project.id, this.newTaskText)
-      .then((response) => {
-        const task = normalize(response.data).get(['id', 'text', 'done']);
+    handleCreateNewTask() {
+      createNewTask(this.project.id, this.newTaskText).then((response) => {
+        const task = normalize(response.data).get(['id', 'text', 'done', 'deadline']);
         this.project.tasks.push(task);
       })
     },
-    handleDestroyTask (taskId) {
-      destroyTask(taskId)
-      .then((response) => {
+    handleDestroyTask(taskId) {
+      destroyTask(taskId).then((response) => {
         this.project.tasks = this.project.tasks.filter((task) => task.id !== taskId)
       })
     }

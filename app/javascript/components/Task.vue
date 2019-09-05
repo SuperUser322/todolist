@@ -2,22 +2,32 @@
   <div class='item'>
     <div class='middle aligned content'>
       <div class='ui checkbox'>
-        <input type='checkbox' :checked='this.task.done' @click="handleMarkAsDone">
-        <label>{{ task.done }}</label>
+        <input type='checkbox' :checked='task.done'>
+        <label @click="handleMarkAsDone"></label>
       </div>
       <template v-if="editMode">
-        <input v-model="newTaskText" :key="task.id">
+        <div class='ui mini input'>
+          <input v-model="newTaskText" :key="task.id">
+        </div>
         <span class='right floated content'>
-          <i class='ui link teal check right icon' @click="handleUpdateTask(); toggleEditMode()"/>
-          <i class='ui link red plus right icon' @click="toggleEditMode"/>
+          <date-picker
+            v-model="newDeadline"
+            lang='en'
+            type='datetime'
+            format='YYYY/MM/DD hh:mm'
+            :minute-step='1'
+          />
+          <i class='ui link teal check right icon' @click="handleUpdateTask(); toggleEditMode()" />
+          <i class='ui link red plus right icon' @click="toggleEditMode" />
         </span>
       </template>
       <template v-else>
         <span>{{task.text}}</span>
         <span class='right floated content'>
+          {{task.deadline}}
           <i class='ui right sort icon icon-type2'/>
-          <i class='ui link right pencil icon icon-type2' @click="toggleEditMode"/>
-          <i class='ui link right trash icon icon-type2' @click="handleDestroyTask(task.id)"/>
+          <i class='ui link right pencil icon icon-type2' @click="toggleEditMode" />
+          <i class='ui link right trash icon icon-type2' @click="handleDestroyTask(task.id)" />
         </span>
       </template>
     </div>
@@ -26,24 +36,34 @@
 
 <script>
 import project from 'components/Project'
-import {updateTask} from 'api.js'
+import { updateTask } from 'api'
+import datePicker from 'vue2-datepicker'
+
 export default {
-  data () {
+  created() {
+    this.newTaskText = this.task.text
+  },
+  components: {
+    datePicker
+  },
+  data() {
     return {
       editMode: false,
-      newTaskText:''
+      newTaskText:'',
+      newDeadline:''
     }
   },
   methods: {
-    toggleEditMode () {
+    toggleEditMode() {
       this.editMode = !this.editMode
     },
-    handleUpdateTask () {
-      updateTask(this.task.id, {text: this.newTaskText, done:false});
-      this.task.text = this.newTaskText
+    handleUpdateTask() {
+      updateTask(this.task.id, { text: this.newTaskText, done: false, deadline: this.newDeadline });
+      this.task.text = this.newTaskText;
+      this.task.deadline = this.newDeadline
     },
-    handleMarkAsDone () {
-      updateTask(this.task.id, {done: !this.task.done});
+    handleMarkAsDone() {
+      updateTask(this.task.id, { done: !this.task.done });
       this.task.done = !this.task.done
     }
   },

@@ -1,6 +1,11 @@
 <template>
   <div>
-    <project v-for="project in projects" :key="project.id" :project="project" :handleDestroyProject="handleDestroyProject"/>
+    <project
+      v-for="project in projects"
+      :key="project.id"
+      :project="project"
+      :handleDestroyProject="handleDestroyProject"
+    />
     <button class='ui button button-type1' @click="handleCreateNewProject">
       <i class='ui plus icon icon-type1'/>
       Add TODO List
@@ -10,35 +15,41 @@
 
 <script>
 import project from 'components/Project'
-import {getProjectsList, createNewProject, destroyProject} from 'api.js'
+import { getProjectsList, createNewProject, destroyProject } from 'api'
 import normalize from 'json-api-normalize'
 
 export default {
   components: {
     project
   },
-  data () {
-      return {projects:[]}
+  data() {
+    return {
+      projects: []
+    }
   },
   methods: {
-    handleCreateNewProject () {
-      createNewProject()
-      .then((response) => {
+    handleCreateNewProject() {
+      createNewProject().then((response) => {
         const project = normalize(response.data).get(['title', 'id']);
         this.projects.push(project);
       })
     },
-    handleDestroyProject (projectId) {
-      destroyProject(projectId)
-      .then(() => {
+    handleDestroyProject(projectId) {
+      destroyProject(projectId).then(() => {
         this.projects = this.projects.filter((project) => project.id !== projectId)
       })
     }
   },
   created () {
-    getProjectsList()
-    .then((response) => {
-      this.projects = normalize(response.data).get(['title', 'tasks.text', 'id', 'tasks.id', 'tasks.done']);
+    getProjectsList().then((response) => {
+      this.projects = normalize(response.data).get([
+        'id',
+        'title',
+        'tasks.text',
+        'tasks.id',
+        'tasks.done',
+        'tasks.deadline'
+      ]);
     })
   },
 }

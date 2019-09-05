@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   def create
-    task = Task.create(text: 'New Task', project_id: params[:project_id])
+    task = Task.create(text: params[:text], project_id: params[:project_id])
     render json: TaskSerializer.new(task).serialized_json
   end
 
@@ -10,7 +10,12 @@ class TasksController < ApplicationController
 
   def update
     task = Task.find(params[:id])
-    task.update(text: params[:text], done: params[:done])
-    render json: TaskSerializer.new(task).serialized_json
+    task.update!(task_params)
+  end
+
+  private
+
+  def task_params
+    params.permit(:text, :done, :deadline)
   end
 end
